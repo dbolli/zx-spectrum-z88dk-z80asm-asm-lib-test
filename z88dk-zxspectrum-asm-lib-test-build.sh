@@ -38,7 +38,10 @@ ORGADDRESS=0x6100
 #z80asm -v -x$Z80EXECNAME -s -l -m -g @$Z80EXECNAME.lst
 
 #z80asm +zx -s -l -m -g -r$((0x6100)) -lasm-lib-test asm-lib-test.asm
-z80asm +zx -v -s -l -m -g -r$(($ORGADDRESS)) -L../asmtest/asm-lib-z88dk/ -lasm-lib -L../../Ticker-zasm/ticker-lib-z88dk/ -lticker-lib $Z80EXECNAME.asm
+z80asm +zx -v -s -l -m -g -r$(($ORGADDRESS)) \
+	-L../asmtest/asm-lib-z88dk/ -lasm-lib \
+	-L../../Ticker-zasm/ticker-lib-z88dk/ -lticker-lib \
+	$Z80EXECNAME.asm
 
 z88dk-dis -o $(($ORGADDRESS)) -x $Z80EXECNAME.map $Z80EXECNAME.bin > $Z80EXECNAME-asm.tmp
 tr '[:lower:]' '[:upper:]' < $Z80EXECNAME-asm.tmp > $Z80EXECNAME-asm.lis
